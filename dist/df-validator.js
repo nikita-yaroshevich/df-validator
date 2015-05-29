@@ -26,7 +26,7 @@
 
 'use strict';
 angular.module('df.validator')
-  .service('defaultValidationRules', function ($interpolate, $q, moment, $filter, $parse, ppEntityManager) {
+  .service('defaultValidationRules', function ($interpolate, $q, $filter, $parse) {
     function invalid(value, object, options) {
       var msg = options.message ? options.message : this.message;
       msg = $interpolate(msg)(angular.extend({value: value, object: object}, options));
@@ -184,30 +184,6 @@ angular.module('df.validator')
           }
           return true;
 
-        }
-      },
-      dateDiff: {
-        message: 'Invalid Date diff',
-        validate: function (value, object, options) {
-          if (!options.rule) {
-            return;
-          }
-
-          var date = moment(value);
-          var compareDate = moment(options.rule.field ? (object[options.rule.field].$modelValue || object[options.rule.field]): options.rule.date);
-
-          options.rule.range = options.rule.range || 0;
-          options.rule.term = options.rule.term || 'days';
-          if (options.rule.more){
-            if (date.diff(compareDate, options.rule.term) < options.rule.range) {
-              return invalid.apply(this, [value, object, options]);
-            }
-          } else {
-            if (date.diff(compareDate, options.rule.term) > options.rule.range) {
-              return invalid.apply(this, [value, object, options]);
-            }
-          }
-          return true;
         }
       }
     };
