@@ -155,9 +155,9 @@ angular.module('df.validator')
         validate: function(value, context, options){
           var emailRe = /^([\w\-_+]+(?:\.[\w\-_+]+)*)@((?:[\w\-]+\.)*\w[\w\-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
           value += '';
-            if ( ! emailRe.test(value) ) return invalid.apply(this, [value, object, options]);
-            if ( /\@.*\@/.test(value) ) return invalid.apply(this, [value, object, options]);
-            if ( /\@.*_/.test(value) ) return invalid.apply(this, [value, object, options]);
+            if ( ! emailRe.test(value) ) return invalid.apply(this, [value, context, options]);
+            if ( /\@.*\@/.test(value) ) return invalid.apply(this, [value, context, options]);
+            if ( /\@.*_/.test(value) ) return invalid.apply(this, [value, context, options]);
         }
       },
       lessThan: {
