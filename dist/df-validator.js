@@ -158,6 +158,8 @@ angular.module('df.validator')
             if ( ! emailRe.test(value) ) return invalid.apply(this, [value, context, options]);
             if ( /\@.*\@/.test(value) ) return invalid.apply(this, [value, context, options]);
             if ( /\@.*_/.test(value) ) return invalid.apply(this, [value, context, options]);
+
+            return true;
         }
       },
       lessThan: {
