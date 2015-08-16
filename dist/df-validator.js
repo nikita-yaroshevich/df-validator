@@ -153,6 +153,7 @@ angular.module('df.validator')
       email:{
         message: 'Invalid email address',
         validate: function(value, context, options){
+          options = angular.isObject(options) ? options : {rule: options};
           var emailRe = /^([\w\-_+]+(?:\.[\w\-_+]+)*)@((?:[\w\-]+\.)*\w[\w\-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
           value += '';
             if ( ! emailRe.test(value) ) return invalid.apply(this, [value, context, options]);
