@@ -150,6 +150,16 @@ angular.module('df.validator')
           return options.rule(value, object, options);
         }
       },
+      email:{
+        message: 'Invalid email address',
+        validate: function(value, context, options){
+          var emailRe = /^([\w\-_+]+(?:\.[\w\-_+]+)*)@((?:[\w\-]+\.)*\w[\w\-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+          value += '';
+            if ( ! emailRe.test(value) ) return invalid.apply(this, [value, object, options]);
+            if ( /\@.*\@/.test(value) ) return invalid.apply(this, [value, object, options]);
+            if ( /\@.*_/.test(value) ) return invalid.apply(this, [value, object, options]);
+        }
+      },
       lessThan: {
         message: 'This field should be less than {{errorField}}',
         validate: function (value, context, options) {
